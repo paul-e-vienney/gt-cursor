@@ -82,6 +82,8 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --density-padding: 8px;
+  --density-sidebar-width: 220px;
 }
 
 .dark {
@@ -201,10 +203,14 @@
 /* Density Variants */
 [data-density="default"] {
   --density-button-height: 28px;
+  --density-padding: 8px;
+  --density-sidebar-width: 220px;
 }
 
 [data-density="comfortable"] {
   --density-button-height: 32px;
+  --density-padding: 12px;
+  --density-sidebar-width: 240px;
 }
 
 /* Style Variants */

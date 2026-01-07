@@ -148,7 +148,7 @@ function SidebarProvider({
         data-slot="sidebar-wrapper"
         style={
           {
-            "--sidebar-width": SIDEBAR_WIDTH,
+            "--sidebar-width": "var(--density-sidebar-width, 220px)",
             "--sidebar-width-icon": SIDEBAR_WIDTH_ICON,
             ...style,
           } as React.CSSProperties
@@ -250,10 +250,11 @@ function Sidebar({
             : "right-0 group-data-[collapsible=offExamples]:right-[calc(var(--sidebar-width)*-1)]",
           // Adjust the padding for floating and inset variants.
           variant === "floating" || variant === "inset"
-            ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]"
+            ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]"
             : "group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[side=left]:border-r group-data-[side=right]:border-l",
           className
         )}
+        style={variant === "floating" || variant === "inset" ? { padding: 'var(--density-padding)' } : undefined}
         {...props}
       >
         <div
@@ -353,7 +354,8 @@ function SidebarHeader({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="sidebar-header"
       data-sidebar="header"
-      className={cn("gap-2 p-2 flex flex-col", className)}
+      className={cn("gap-2 flex flex-col", className)}
+      style={{ padding: 'var(--density-padding)' }}
       {...props}
     />
   )
@@ -364,7 +366,8 @@ function SidebarFooter({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="sidebar-footer"
       data-sidebar="footer"
-      className={cn("gap-2 p-2 flex flex-col", className)}
+      className={cn("gap-2 flex flex-col", className)}
+      style={{ padding: 'var(--density-padding)' }}
       {...props}
     />
   )
@@ -404,9 +407,10 @@ function SidebarGroup({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="sidebar-group"
       data-sidebar="group"
       className={cn(
-        "px-2 py-2 relative flex w-full min-w-0 flex-col",
+        "relative flex w-full min-w-0 flex-col",
         className
       )}
+      style={{ padding: 'var(--density-padding)' }}
       {...props}
     />
   )

@@ -43,6 +43,8 @@ export default function RootLayout({
                 } else if (theme === 'dark-graphite') {
                   document.documentElement.classList.add('dark-graphite');
                 }
+                const density = localStorage.getItem('density') || 'default';
+                document.documentElement.setAttribute('data-density', density);
               })();
             `,
           }}
