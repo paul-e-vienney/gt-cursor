@@ -8,10 +8,24 @@ import {
   PromptInputActions,
   PromptInputAction,
 } from "@/components/ui/prompt-input";
-import { ArrowUpIcon } from "@phosphor-icons/react";
+import { ArrowUpIcon, PaperclipIcon } from "@phosphor-icons/react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function Page() {
   const [inputValue, setInputValue] = useState("");
+  const [selectedModel, setSelectedModel] = useState("Claude Sonnet 4.5");
+  
+  const modelOptions = {
+    "Claude Sonnet 4.5": "Claude Sonnet 4.5",
+    "Claude Opus 4.5": "Claude Opus 4.5",
+    "Claude Haiku 4.5": "Claude Haiku 4.5",
+  };
 
   return (
     <div className="flex flex-col h-full">
@@ -30,24 +44,43 @@ export default function Page() {
           onValueChange={setInputValue}
         >
           <PromptInputTextarea placeholder="Ask a question or collaborate on your next PR" disableAutosize />
+          <div className="absolute bottom-2 left-2">
+            <Select value={selectedModel} onValueChange={setSelectedModel}>
+              <SelectTrigger className="w-fit text-[13px] text-muted-foreground [&_svg]:text-muted-foreground border-transparent bg-transparent hover:bg-card hover:text-card-foreground hover:[&_svg]:text-card-foreground active:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] active:text-card-foreground active:[&_svg]:text-card-foreground rounded-[6px] whitespace-normal *:data-[slot=select-value]:line-clamp-none gap-2 min-w-fit [&>svg:last-of-type]:!rotate-0 data-[open]:[&>svg:last-of-type]:!rotate-0 aria-expanded:[&>svg:last-of-type]:!rotate-0 px-2">
+                <SelectValue placeholder="Select model" className="min-w-0 max-w-[calc(100%-2rem)] overflow-hidden text-ellipsis whitespace-nowrap">
+                  {modelOptions[selectedModel as keyof typeof modelOptions] || selectedModel}
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent className="min-w-fit w-auto max-w-[300px]" side="bottom" sideOffset={8} flip={false}>
+                <SelectItem value="Claude Sonnet 4.5" className="pl-2">Claude Sonnet 4.5</SelectItem>
+                <SelectItem value="Claude Opus 4.5" className="pl-2">Claude Opus 4.5</SelectItem>
+                <SelectItem value="Claude Haiku 4.5" className="pl-2">Claude Haiku 4.5</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
           <PromptInputActions className="absolute bottom-2 right-2">
-            <PromptInputAction tooltip="Send">
+            <PromptInputAction tooltip="Attach">
               <div
-                onClick={(e) => {
-                  if (!inputValue.trim()) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                  }
-                }}
-                className={`h-7 w-7 rounded-[6px] flex items-center justify-center transition-colors ${
-                  !inputValue.trim() 
-                    ? "bg-[oklab(0.943853_0.00107113_0.000336707_/_0.2)] cursor-not-allowed pointer-events-none" 
-                    : "bg-white hover:bg-white/90 cursor-pointer"
-                }`}
+                className="h-7 w-7 rounded-[6px] flex items-center justify-center transition-colors bg-transparent hover:bg-card hover:text-card-foreground cursor-pointer group"
               >
-                <ArrowUpIcon className="size-4" style={{ color: 'var(--background)' }} />
+                <PaperclipIcon className="size-4 text-muted-foreground group-hover:text-card-foreground transition-colors" />
               </div>
             </PromptInputAction>
+            <div
+              onClick={(e) => {
+                if (!inputValue.trim()) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }
+              }}
+              className={`h-7 w-7 rounded-[6px] flex items-center justify-center transition-colors ${
+                !inputValue.trim() 
+                  ? "bg-[oklab(0.943853_0.00107113_0.000336707_/_0.2)] cursor-not-allowed pointer-events-none" 
+                  : "bg-white hover:bg-white/90 cursor-pointer"
+              }`}
+            >
+              <ArrowUpIcon className="size-4" style={{ color: 'var(--background)' }} />
+            </div>
           </PromptInputActions>
         </PromptInput>
       </div>
