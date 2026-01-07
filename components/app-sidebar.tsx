@@ -7,6 +7,7 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarHeader,
+  SidebarFooter,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -26,6 +27,7 @@ import {
   BellIcon,
   MagnifyingGlassIcon,
   HexagonIcon,
+  QuestionIcon,
 } from "@phosphor-icons/react"
 import { Button } from "@/components/ui/button"
 import {
@@ -111,6 +113,15 @@ export function AppSidebar({ children }: { children: React.ReactNode }) {
             </SidebarGroupContent>
           </SidebarGroup>
         </SidebarContent>
+        <SidebarFooter className="p-2">
+          <Button
+            variant="ghost"
+            aria-label="Help"
+            className="h-[28px] w-[28px] text-muted-foreground [&_svg]:text-muted-foreground [&_svg]:w-4 [&_svg]:h-4 hover:bg-card hover:text-card-foreground hover:[&_svg]:text-card-foreground active:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] active:text-card-foreground active:[&_svg]:text-card-foreground rounded-full p-0"
+          >
+            <QuestionIcon />
+          </Button>
+        </SidebarFooter>
         <SidebarRail />
       </Sidebar>
       <SidebarInset>{children}</SidebarInset>
