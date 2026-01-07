@@ -51,7 +51,7 @@ export default function Page() {
       </header>
       <div className="flex-1 flex flex-col items-center justify-center p-4 gap-4 -mt-12">
         <div className="w-[574px] flex flex-col gap-1">
-          <h2 className="text-[24px] font-medium text-center mb-8">Create your first pull request</h2>
+          <h2 className="text-[24px] font-medium text-center mb-8 tracking-[0.38px]">Create your first pull request</h2>
           <div className="flex gap-2 pl-2">
             <Select value={selectedRepo} onValueChange={(value) => value && setSelectedRepo(value)}>
               <SelectTrigger className="w-fit text-[13px] text-muted-foreground [&_svg]:text-muted-foreground border-transparent bg-transparent hover:text-card-foreground hover:[&_svg]:text-card-foreground active:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] active:text-card-foreground active:[&_svg]:text-card-foreground rounded-[6px] whitespace-normal *:data-[slot=select-value]:line-clamp-none gap-2 min-w-fit [&>svg:last-of-type]:!rotate-0 data-[open]:[&>svg:last-of-type]:!rotate-0 aria-expanded:[&>svg:last-of-type]:!rotate-0 px-0 h-7 items-center">
