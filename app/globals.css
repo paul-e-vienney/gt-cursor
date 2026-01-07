@@ -84,6 +84,7 @@
   --sidebar-ring: oklch(0.708 0 0);
   --density-padding: 8px;
   --density-sidebar-width: 220px;
+  --font-size-base: 13px;
 }
 
 .dark {
@@ -211,6 +212,15 @@
   --density-button-height: 32px;
   --density-padding: 12px;
   --density-sidebar-width: 240px;
+}
+
+/* Font Size Variants */
+[data-font-size="default"] {
+  --font-size-base: 13px;
+}
+
+[data-font-size="large"] {
+  --font-size-base: 14px;
 }
 
 /* Style Variants */

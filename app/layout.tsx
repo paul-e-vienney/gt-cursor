@@ -45,6 +45,8 @@ export default function RootLayout({
                 }
                 const density = localStorage.getItem('density') || 'default';
                 document.documentElement.setAttribute('data-density', density);
+                const fontSize = localStorage.getItem('fontSize') || 'default';
+                document.documentElement.setAttribute('data-font-size', fontSize);
               })();
             `,
           }}

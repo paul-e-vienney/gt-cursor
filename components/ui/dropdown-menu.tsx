@@ -101,6 +101,7 @@ function DropdownMenuSubTrigger({
   className,
   inset,
   children,
+  style,
   ...props
 }: MenuPrimitive.SubmenuTrigger.Props & {
   inset?: boolean
@@ -110,9 +111,10 @@ function DropdownMenuSubTrigger({
       data-slot="dropdown-menu-sub-trigger"
       data-inset={inset}
       className={cn(
-        "text-muted-foreground [&_svg]:text-muted-foreground hover:bg-card hover:text-card-foreground hover:[&_svg]:text-card-foreground data-[highlighted]:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] data-[highlighted]:text-card-foreground data-[highlighted]:[&_svg]:text-card-foreground data-open:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] data-open:text-card-foreground data-open:[&_svg]:text-card-foreground h-[var(--density-button-height)] gap-2 rounded-[6px] px-2 py-[8px] text-[13px] relative flex w-full cursor-default items-center outline-hidden select-none data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:size-4 transition-colors",
+        "text-muted-foreground [&_svg]:text-muted-foreground hover:bg-card hover:text-card-foreground hover:[&_svg]:text-card-foreground data-[highlighted]:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] data-[highlighted]:text-card-foreground data-[highlighted]:[&_svg]:text-card-foreground data-open:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] data-open:text-card-foreground data-open:[&_svg]:text-card-foreground h-[var(--density-button-height)] gap-2 rounded-[6px] px-2 py-[8px] relative flex w-full cursor-default items-center outline-hidden select-none data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:size-4 transition-colors",
         className
       )}
+      style={{ fontSize: 'var(--font-size-base)', ...style }}
       {...props}
     >
       {children}

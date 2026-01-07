@@ -43,6 +43,12 @@ export default function Page() {
     }
     return "default";
   });
+  const [fontSize, setFontSize] = useState<"default" | "large">(() => {
+    if (typeof window !== "undefined") {
+      return (localStorage.getItem("fontSize") as "default" | "large") || "default";
+    }
+    return "default";
+  });
   
   const themes: Array<{ value: "light" | "dark" | "dark-cursor" | "dark-graphite"; label: string }> = [
     { value: "light", label: "Light" },
@@ -61,12 +67,24 @@ export default function Page() {
     { value: "lucide", label: "Lucide" },
   ];
   
+  const fontSizes: Array<{ value: "default" | "large"; label: string }> = [
+    { value: "default", label: "Default" },
+    { value: "large", label: "Large" },
+  ];
+  
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("density", density);
       document.documentElement.setAttribute("data-density", density);
     }
   }, [density]);
+  
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("fontSize", fontSize);
+      document.documentElement.setAttribute("data-font-size", fontSize);
+    }
+  }, [fontSize]);
   
   const modelOptions = {
     "Claude Sonnet 4.5": "Claude Sonnet 4.5",
@@ -177,6 +195,32 @@ export default function Page() {
                 ))}
               </DropdownMenuSubContent>
             </DropdownMenuSub>
+            <DropdownMenuSub>
+              <DropdownMenuSubTrigger className="whitespace-normal">
+                <div className="flex items-center justify-between gap-4 min-w-0 w-full">
+                  <span>Font</span>
+                  {fontSizes.find(f => f.value === fontSize) && (
+                    <span className="text-muted-foreground text-xs shrink-0">
+                      {fontSizes.find(f => f.value === fontSize)?.label}
+                    </span>
+                  )}
+                </div>
+              </DropdownMenuSubTrigger>
+              <DropdownMenuSubContent>
+                {fontSizes.map((fontSizeOption) => (
+                  <DropdownMenuItem
+                    key={fontSizeOption.value}
+                    onClick={() => setFontSize(fontSizeOption.value)}
+                    className="flex items-center justify-between"
+                  >
+                    <span>{fontSizeOption.label}</span>
+                    {fontSize === fontSizeOption.value && (
+                      <CheckIcon className="size-4" />
+                    )}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuSubContent>
+            </DropdownMenuSub>
           </DropdownMenuContent>
         </DropdownMenu>
       </header>
@@ -185,7 +229,7 @@ export default function Page() {
           <h2 className="text-[24px] font-medium text-center mb-8 tracking-[0.38px]">Create your first pull request</h2>
           <div className="flex gap-2 pl-2">
             <Select value={selectedRepo} onValueChange={(value) => value && setSelectedRepo(value)}>
-              <SelectTrigger className="w-fit text-[13px] text-muted-foreground [&_svg]:text-muted-foreground border-transparent bg-transparent hover:text-card-foreground hover:[&_svg]:text-card-foreground active:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] active:text-card-foreground active:[&_svg]:text-card-foreground rounded-[6px] whitespace-normal *:data-[slot=select-value]:line-clamp-none gap-2 min-w-fit [&>svg:last-of-type]:!rotate-0 data-[open]:[&>svg:last-of-type]:!rotate-0 aria-expanded:[&>svg:last-of-type]:!rotate-0 px-0 h-[var(--density-button-height)] items-center">
+              <SelectTrigger className="w-fit text-muted-foreground [&_svg]:text-muted-foreground border-transparent bg-transparent hover:text-card-foreground hover:[&_svg]:text-card-foreground active:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] active:text-card-foreground active:[&_svg]:text-card-foreground rounded-[6px] whitespace-normal *:data-[slot=select-value]:line-clamp-none gap-2 min-w-fit [&>svg:last-of-type]:!rotate-0 data-[open]:[&>svg:last-of-type]:!rotate-0 aria-expanded:[&>svg:last-of-type]:!rotate-0 px-0 h-[var(--density-button-height)] items-center">
                 <SelectValue className="min-w-0 max-w-[calc(100%-2rem)] overflow-hidden text-ellipsis whitespace-nowrap" />
               </SelectTrigger>
               <SelectContent className="min-w-fit w-auto max-w-[300px]" side="bottom" sideOffset={8} flip={false}>
@@ -194,7 +238,7 @@ export default function Page() {
               </SelectContent>
             </Select>
             <Select value={selectedBranch} onValueChange={(value) => value && setSelectedBranch(value)}>
-              <SelectTrigger className="w-fit text-[13px] text-muted-foreground [&_svg]:text-muted-foreground border-transparent bg-transparent hover:text-card-foreground hover:[&_svg]:text-card-foreground active:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] active:text-card-foreground active:[&_svg]:text-card-foreground rounded-[6px] whitespace-normal *:data-[slot=select-value]:line-clamp-none gap-2 min-w-fit [&>svg:last-of-type]:!rotate-0 data-[open]:[&>svg:last-of-type]:!rotate-0 aria-expanded:[&>svg:last-of-type]:!rotate-0 px-0 h-[var(--density-button-height)] items-center">
+              <SelectTrigger className="w-fit text-muted-foreground [&_svg]:text-muted-foreground border-transparent bg-transparent hover:text-card-foreground hover:[&_svg]:text-card-foreground active:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] active:text-card-foreground active:[&_svg]:text-card-foreground rounded-[6px] whitespace-normal *:data-[slot=select-value]:line-clamp-none gap-2 min-w-fit [&>svg:last-of-type]:!rotate-0 data-[open]:[&>svg:last-of-type]:!rotate-0 aria-expanded:[&>svg:last-of-type]:!rotate-0 px-0 h-[var(--density-button-height)] items-center">
                 <SelectValue className="min-w-0 max-w-[calc(100%-2rem)] overflow-hidden text-ellipsis whitespace-nowrap" />
               </SelectTrigger>
               <SelectContent className="min-w-fit w-auto max-w-[300px]" side="bottom" sideOffset={8} flip={false}>
@@ -213,7 +257,7 @@ export default function Page() {
             <PromptInputTextarea placeholder="Ask a question or collaborate on your next PR" disableAutosize />
             <div className="absolute bottom-2 left-2">
               <Select value={selectedModel} onValueChange={(value) => value && setSelectedModel(value)}>
-                <SelectTrigger className="w-fit text-[13px] text-muted-foreground [&_svg]:text-muted-foreground border-transparent bg-transparent hover:bg-card hover:text-card-foreground hover:[&_svg]:text-card-foreground active:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] active:text-card-foreground active:[&_svg]:text-card-foreground rounded-[6px] whitespace-normal *:data-[slot=select-value]:line-clamp-none gap-2 min-w-fit [&>svg:last-of-type]:!rotate-0 data-[open]:[&>svg:last-of-type]:!rotate-0 aria-expanded:[&>svg:last-of-type]:!rotate-0 px-2">
+                <SelectTrigger className="w-fit text-muted-foreground [&_svg]:text-muted-foreground border-transparent bg-transparent hover:bg-card hover:text-card-foreground hover:[&_svg]:text-card-foreground active:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] active:text-card-foreground active:[&_svg]:text-card-foreground rounded-[6px] whitespace-normal *:data-[slot=select-value]:line-clamp-none gap-2 min-w-fit [&>svg:last-of-type]:!rotate-0 data-[open]:[&>svg:last-of-type]:!rotate-0 aria-expanded:[&>svg:last-of-type]:!rotate-0 px-2">
                   <SelectValue className="min-w-0 max-w-[calc(100%-2rem)] overflow-hidden text-ellipsis whitespace-nowrap">
                     {modelOptions[selectedModel as keyof typeof modelOptions] || selectedModel}
                   </SelectValue>

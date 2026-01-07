@@ -27,7 +27,6 @@ import { SidebarIcon } from "@/lib/icons"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
-const SIDEBAR_WIDTH = "220px"
 const SIDEBAR_WIDTH_MOBILE = "18rem"
 const SIDEBAR_WIDTH_ICON = "3rem"
 const SIDEBAR_KEYBOARD_SHORTCUT = "b"
@@ -509,9 +508,9 @@ const sidebarMenuButtonVariants = cva(
         outline: "bg-background hover:bg-card hover:text-card-foreground shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))]",
       },
       size: {
-        default: "h-[var(--density-button-height)] text-[13px]",
-        sm: "min-h-7 text-[13px]",
-        lg: "min-h-12 text-[13px] group-data-[collapsible=icon]:p-0!",
+        default: "h-[var(--density-button-height)]",
+        sm: "min-h-7",
+        lg: "min-h-12 group-data-[collapsible=icon]:p-0!",
       },
     },
     defaultVariants: {
@@ -540,6 +539,7 @@ function SidebarMenuButton({
     props: mergeProps<"button">(
       {
         className: cn(sidebarMenuButtonVariants({ variant, size }), className),
+        style: { fontSize: 'var(--font-size-base)', ...props.style },
       },
       props
     ),
