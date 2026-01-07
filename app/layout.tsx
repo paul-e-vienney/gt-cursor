@@ -33,11 +33,15 @@ export default function RootLayout({
             __html: `
               (function() {
                 const theme = localStorage.getItem('theme') || 'dark-cursor';
-                document.documentElement.classList.remove('light', 'dark', 'dark-cursor');
-                if (theme === 'dark-cursor') {
-                  document.documentElement.classList.add('dark-cursor');
+                document.documentElement.classList.remove('light', 'dark', 'dark-cursor', 'dark-graphite');
+                if (theme === 'light') {
+                  // Light theme - no class needed
                 } else if (theme === 'dark') {
                   document.documentElement.classList.add('dark');
+                } else if (theme === 'dark-cursor') {
+                  document.documentElement.classList.add('dark-cursor');
+                } else if (theme === 'dark-graphite') {
+                  document.documentElement.classList.add('dark-graphite');
                 }
               })();
             `,

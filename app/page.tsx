@@ -87,14 +87,13 @@ export default function Page() {
         </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
+            <button
+              type="button"
               aria-label="Switch theme"
-              className="text-muted-foreground [&_svg]:text-muted-foreground [&_svg]:size-4 hover:bg-card hover:text-card-foreground hover:[&_svg]:text-card-foreground active:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] active:text-card-foreground active:[&_svg]:text-card-foreground rounded-[6px] relative z-10"
+              className="text-muted-foreground [&_svg]:text-muted-foreground [&_svg]:size-4 hover:bg-card hover:text-card-foreground hover:[&_svg]:text-card-foreground active:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] active:text-card-foreground active:[&_svg]:text-card-foreground rounded-[6px] relative z-10 size-[var(--density-button-height)] flex items-center justify-center"
             >
               <PaletteIcon weight="fill" />
-            </Button>
+            </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="min-w-fit w-auto">
             <DropdownMenuSub>
