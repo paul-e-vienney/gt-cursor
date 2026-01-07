@@ -41,7 +41,7 @@ function SelectTrigger({
       data-slot="select-trigger"
       data-size={size}
         className={cn(
-          "border-input data-[placeholder]:text-muted-foreground bg-transparent focus-visible:border-ring focus-visible:ring-ring/30 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 gap-1.5 rounded-md border px-2 py-1.5 text-xs/relaxed transition-colors focus-visible:ring-[2px] aria-invalid:ring-[2px] data-[size=default]:h-7 data-[size=sm]:h-6 *:data-[slot=select-value]:flex *:data-[slot=select-value]:gap-1.5 [&_svg:not([class*='size-'])]:size-3.5 flex w-fit items-center justify-between whitespace-nowrap outline-none disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center [&_svg]:pointer-events-none [&_svg]:shrink-0 [&>svg:last-of-type]:transition-transform [&>svg:last-of-type]:duration-200 data-[open]:[&>svg:last-of-type]:-rotate-180 aria-expanded:[&>svg:last-of-type]:-rotate-180",
+          "border-input data-[placeholder]:text-muted-foreground bg-transparent focus-visible:border-ring focus-visible:ring-ring/30 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 gap-1.5 rounded-md border px-2 py-1.5 text-xs/relaxed transition-colors focus-visible:ring-[2px] aria-invalid:ring-[2px] data-[size=default]:h-[var(--density-button-height)] data-[size=sm]:h-6 *:data-[slot=select-value]:flex *:data-[slot=select-value]:gap-1.5 [&_svg:not([class*='size-'])]:size-3.5 flex w-fit items-center justify-between whitespace-nowrap outline-none disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center [&_svg]:pointer-events-none [&_svg]:shrink-0 [&>svg:last-of-type]:transition-transform [&>svg:last-of-type]:duration-200 data-[open]:[&>svg:last-of-type]:-rotate-180 aria-expanded:[&>svg:last-of-type]:-rotate-180",
           className
         )}
       {...props}
@@ -120,7 +120,7 @@ function SelectItem({
     <SelectPrimitive.Item
       data-slot="select-item"
       className={cn(
-        "text-muted-foreground [&_svg]:text-muted-foreground hover:bg-card hover:text-card-foreground hover:[&_svg]:text-card-foreground data-[highlighted]:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] data-[highlighted]:text-card-foreground data-[highlighted]:[&_svg]:text-card-foreground h-[28px] gap-2 rounded-[6px] pl-[8px] pr-10 py-[8px] text-[13px] relative flex w-full cursor-default items-center outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:size-4 transition-colors",
+        "text-muted-foreground [&_svg]:text-muted-foreground hover:bg-card hover:text-card-foreground hover:[&_svg]:text-card-foreground data-[highlighted]:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] data-[highlighted]:text-card-foreground data-[highlighted]:[&_svg]:text-card-foreground h-[var(--density-button-height)] gap-2 rounded-[6px] pl-[8px] pr-10 py-[8px] text-[13px] relative flex w-full cursor-default items-center outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:size-4 transition-colors",
         className
       )}
       {...props}

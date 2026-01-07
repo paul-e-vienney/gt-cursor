@@ -43,10 +43,11 @@ export default function Page() {
     return "default";
   });
   
-  const themes: Array<{ value: "light" | "dark" | "dark-cursor"; label: string }> = [
+  const themes: Array<{ value: "light" | "dark" | "dark-cursor" | "dark-graphite"; label: string }> = [
     { value: "light", label: "Light" },
     { value: "dark", label: "Dark" },
     { value: "dark-cursor", label: "Dark Cursor" },
+    { value: "dark-graphite", label: "Dark Graphite" },
   ];
   
   const densities: Array<{ value: "default" | "comfortable"; label: string }> = [
@@ -156,7 +157,7 @@ export default function Page() {
           <h2 className="text-[24px] font-medium text-center mb-8 tracking-[0.38px]">Create your first pull request</h2>
           <div className="flex gap-2 pl-2">
             <Select value={selectedRepo} onValueChange={(value) => value && setSelectedRepo(value)}>
-              <SelectTrigger className="w-fit text-[13px] text-muted-foreground [&_svg]:text-muted-foreground border-transparent bg-transparent hover:text-card-foreground hover:[&_svg]:text-card-foreground active:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] active:text-card-foreground active:[&_svg]:text-card-foreground rounded-[6px] whitespace-normal *:data-[slot=select-value]:line-clamp-none gap-2 min-w-fit [&>svg:last-of-type]:!rotate-0 data-[open]:[&>svg:last-of-type]:!rotate-0 aria-expanded:[&>svg:last-of-type]:!rotate-0 px-0 h-7 items-center">
+              <SelectTrigger className="w-fit text-[13px] text-muted-foreground [&_svg]:text-muted-foreground border-transparent bg-transparent hover:text-card-foreground hover:[&_svg]:text-card-foreground active:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] active:text-card-foreground active:[&_svg]:text-card-foreground rounded-[6px] whitespace-normal *:data-[slot=select-value]:line-clamp-none gap-2 min-w-fit [&>svg:last-of-type]:!rotate-0 data-[open]:[&>svg:last-of-type]:!rotate-0 aria-expanded:[&>svg:last-of-type]:!rotate-0 px-0 h-[var(--density-button-height)] items-center">
                 <SelectValue className="min-w-0 max-w-[calc(100%-2rem)] overflow-hidden text-ellipsis whitespace-nowrap" />
               </SelectTrigger>
               <SelectContent className="min-w-fit w-auto max-w-[300px]" side="bottom" sideOffset={8} flip={false}>
@@ -165,7 +166,7 @@ export default function Page() {
               </SelectContent>
             </Select>
             <Select value={selectedBranch} onValueChange={(value) => value && setSelectedBranch(value)}>
-              <SelectTrigger className="w-fit text-[13px] text-muted-foreground [&_svg]:text-muted-foreground border-transparent bg-transparent hover:text-card-foreground hover:[&_svg]:text-card-foreground active:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] active:text-card-foreground active:[&_svg]:text-card-foreground rounded-[6px] whitespace-normal *:data-[slot=select-value]:line-clamp-none gap-2 min-w-fit [&>svg:last-of-type]:!rotate-0 data-[open]:[&>svg:last-of-type]:!rotate-0 aria-expanded:[&>svg:last-of-type]:!rotate-0 px-0 h-7 items-center">
+              <SelectTrigger className="w-fit text-[13px] text-muted-foreground [&_svg]:text-muted-foreground border-transparent bg-transparent hover:text-card-foreground hover:[&_svg]:text-card-foreground active:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] active:text-card-foreground active:[&_svg]:text-card-foreground rounded-[6px] whitespace-normal *:data-[slot=select-value]:line-clamp-none gap-2 min-w-fit [&>svg:last-of-type]:!rotate-0 data-[open]:[&>svg:last-of-type]:!rotate-0 aria-expanded:[&>svg:last-of-type]:!rotate-0 px-0 h-[var(--density-button-height)] items-center">
                 <SelectValue className="min-w-0 max-w-[calc(100%-2rem)] overflow-hidden text-ellipsis whitespace-nowrap" />
               </SelectTrigger>
               <SelectContent className="min-w-fit w-auto max-w-[300px]" side="bottom" sideOffset={8} flip={false}>
@@ -199,7 +200,7 @@ export default function Page() {
             <PromptInputActions className="absolute bottom-2 right-2">
               <PromptInputAction tooltip="Attach">
                 <div
-                  className="h-7 w-7 rounded-[6px] flex items-center justify-center transition-colors bg-transparent hover:bg-card hover:text-card-foreground cursor-pointer group"
+                  className="h-[var(--density-button-height)] w-[var(--density-button-height)] rounded-[6px] flex items-center justify-center transition-colors bg-transparent hover:bg-card hover:text-card-foreground cursor-pointer group"
                 >
                   <PaperclipIcon className="size-4 text-muted-foreground group-hover:text-card-foreground transition-colors" />
                 </div>
@@ -211,7 +212,7 @@ export default function Page() {
                     e.stopPropagation();
                   }
                 }}
-                className={`h-7 w-7 rounded-[6px] flex items-center justify-center transition-colors ${
+                className={`h-[var(--density-button-height)] w-[var(--density-button-height)] rounded-[6px] flex items-center justify-center transition-colors ${
                   !inputValue.trim() 
                     ? "bg-[oklab(0.943853_0.00107113_0.000336707_/_0.2)] cursor-not-allowed pointer-events-none" 
                     : "bg-foreground hover:bg-foreground/90 cursor-pointer"
@@ -229,13 +230,13 @@ export default function Page() {
           </PromptInput>
         </div>
         <div className="flex gap-2 justify-center flex-wrap max-w-[574px]">
-          <PromptSuggestion onClick={() => setInputValue("Find and fix a bug")} className="bg-muted dark-cursor:bg-[rgb(27,26,21)] text-muted-foreground">
+          <PromptSuggestion onClick={() => setInputValue("Find and fix a bug")} className="bg-muted dark-cursor:bg-[rgb(27,26,21)] dark-graphite:bg-[rgb(27,27,27)] text-muted-foreground">
             Find and fix a bug
           </PromptSuggestion>
-          <PromptSuggestion onClick={() => setInputValue("Optimize performance")} className="bg-muted dark-cursor:bg-[rgb(27,26,21)] text-muted-foreground">
+          <PromptSuggestion onClick={() => setInputValue("Optimize performance")} className="bg-muted dark-cursor:bg-[rgb(27,26,21)] dark-graphite:bg-[rgb(27,27,27)] text-muted-foreground">
             Optimize performance
           </PromptSuggestion>
-          <PromptSuggestion onClick={() => setInputValue("Update missing README section")} className="bg-muted dark-cursor:bg-[rgb(27,26,21)] text-muted-foreground">
+          <PromptSuggestion onClick={() => setInputValue("Update missing README section")} className="bg-muted dark-cursor:bg-[rgb(27,26,21)] dark-graphite:bg-[rgb(27,27,27)] text-muted-foreground">
             Update missing README section
           </PromptSuggestion>
         </div>

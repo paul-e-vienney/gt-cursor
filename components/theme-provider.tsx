@@ -2,7 +2,7 @@
 
 import * as React from "react"
 
-type Theme = "light" | "dark" | "dark-cursor"
+type Theme = "light" | "dark" | "dark-cursor" | "dark-graphite"
 
 type ThemeProviderProps = {
   children: React.ReactNode
@@ -36,17 +36,20 @@ export function ThemeProvider({
     const root = window.document.documentElement
 
     // Remove all theme classes
-    root.classList.remove("light", "dark", "dark-cursor")
+    root.classList.remove("light", "dark", "dark-cursor", "dark-graphite")
 
     // Add the current theme class
     if (theme === "light") {
-      root.classList.remove("dark", "dark-cursor")
+      root.classList.remove("dark", "dark-cursor", "dark-graphite")
     } else if (theme === "dark") {
       root.classList.add("dark")
-      root.classList.remove("dark-cursor")
+      root.classList.remove("dark-cursor", "dark-graphite")
     } else if (theme === "dark-cursor") {
       root.classList.add("dark-cursor")
-      root.classList.remove("dark")
+      root.classList.remove("dark", "dark-graphite")
+    } else if (theme === "dark-graphite") {
+      root.classList.add("dark-graphite")
+      root.classList.remove("dark", "dark-cursor")
     }
 
     // Save to localStorage

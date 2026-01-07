@@ -4,6 +4,7 @@
 
 @custom-variant dark (&:is(.dark *));
 @custom-variant dark-cursor (&:is(.dark-cursor *));
+@custom-variant dark-graphite (&:is(.dark-graphite *));
 
 @theme inline {
   --color-background: var(--background);
@@ -150,6 +151,41 @@
   --sidebar-accent-foreground: oklch(0.92 0.01 85);
   --sidebar-border: oklch(0.28 0.01 85);
   --sidebar-ring: oklch(0.65 0.03 75);
+}
+
+.dark-graphite {
+  --background: #1E1E20;
+  --foreground: oklch(0.92 0.01 0);
+  --card: #29292E;
+  --card-foreground: oklch(0.92 0.01 0);
+  --popover: #29292E;
+  --popover-foreground: oklch(0.92 0.01 0);
+  --primary: oklch(0.75 0.05 0);
+  --primary-foreground: oklch(0.15 0.01 0);
+  --secondary: oklch(0.30 0.01 0);
+  --secondary-foreground: oklch(0.92 0.01 0);
+  --muted: oklch(0.32 0.01 0);
+  --muted-foreground: oklch(0.65 0.01 0);
+  --accent: oklch(0.35 0.01 0);
+  --accent-foreground: oklch(0.92 0.01 0);
+  --destructive: oklch(0.65 0.18 25);
+  --border: #2a2a2a;
+  --input: #2a2a2a;
+  --ring: oklch(0.65 0.03 0);
+  --chart-1: oklch(0.7 0.08 0);
+  --chart-2: oklch(0.65 0.08 0);
+  --chart-3: oklch(0.6 0.08 0);
+  --chart-4: oklch(0.55 0.08 0);
+  --chart-5: oklch(0.5 0.08 0);
+  --radius: 0.625rem;
+  --sidebar: #151515;
+  --sidebar-foreground: oklch(0.92 0.01 0);
+  --sidebar-primary: oklch(0.75 0.05 0);
+  --sidebar-primary-foreground: oklch(0.15 0.01 0);
+  --sidebar-accent: oklch(0.35 0.01 0);
+  --sidebar-accent-foreground: oklch(0.92 0.01 0);
+  --sidebar-border: #2a2a2a;
+  --sidebar-ring: oklch(0.65 0.03 0);
 }
 
 @layer base {
