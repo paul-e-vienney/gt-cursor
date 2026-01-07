@@ -116,12 +116,12 @@ function SelectItem({
     <SelectPrimitive.Item
       data-slot="select-item"
       className={cn(
-        "text-muted-foreground [&_svg]:text-muted-foreground hover:bg-card hover:text-card-foreground hover:[&_svg]:text-card-foreground data-[highlighted]:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] data-[highlighted]:text-card-foreground data-[highlighted]:[&_svg]:text-card-foreground data-[highlighted]:font-medium h-[28px] gap-2 rounded-[6px] pl-[8px] pr-8 py-[8px] text-[13px] relative flex w-full cursor-default items-center outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:size-4 transition-colors",
+        "text-muted-foreground [&_svg]:text-muted-foreground hover:bg-card hover:text-card-foreground hover:[&_svg]:text-card-foreground data-[highlighted]:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] data-[highlighted]:text-card-foreground data-[highlighted]:[&_svg]:text-card-foreground h-[28px] gap-2 rounded-[6px] pl-[8px] pr-10 py-[8px] text-[13px] relative flex w-full cursor-default items-center outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:size-4 transition-colors",
         className
       )}
       {...props}
     >
-      <SelectPrimitive.ItemText className="flex flex-1 gap-2 shrink-0 whitespace-nowrap items-center">
+      <SelectPrimitive.ItemText className="flex flex-1 gap-2 shrink-0 whitespace-normal items-center">
         {children}
       </SelectPrimitive.ItemText>
       <SelectPrimitive.ItemIndicator
