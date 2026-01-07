@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import {
   PromptInput,
@@ -18,12 +18,48 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { PromptSuggestion } from "@/components/ui/prompt-suggestion";
+import { useTheme } from "@/components/theme-provider";
+import { PaletteIcon, CheckIcon } from "@phosphor-icons/react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
+} from "@/components/ui/dropdown-menu";
 
 export default function Page() {
   const [inputValue, setInputValue] = useState("");
   const [selectedModel, setSelectedModel] = useState("Claude Sonnet 4.5");
   const [selectedRepo, setSelectedRepo] = useState("gt-cursor");
   const [selectedBranch, setSelectedBranch] = useState("main");
+  const { theme, setTheme } = useTheme();
+  const [density, setDensity] = useState<"default" | "comfortable">(() => {
+    if (typeof window !== "undefined") {
+      return (localStorage.getItem("density") as "default" | "comfortable") || "default";
+    }
+    return "default";
+  });
+  
+  const themes: Array<{ value: "light" | "dark" | "dark-cursor"; label: string }> = [
+    { value: "light", label: "Light" },
+    { value: "dark", label: "Dark" },
+    { value: "dark-cursor", label: "Dark Cursor" },
+  ];
+  
+  const densities: Array<{ value: "default" | "comfortable"; label: string }> = [
+    { value: "default", label: "Default" },
+    { value: "comfortable", label: "Comfortable" },
+  ];
+  
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("density", density);
+      document.documentElement.setAttribute("data-density", density);
+    }
+  }, [density]);
   
   const modelOptions = {
     "Claude Sonnet 4.5": "Claude Sonnet 4.5",
@@ -48,6 +84,72 @@ export default function Page() {
         >
           <GearIcon />
         </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Switch theme"
+              className="text-muted-foreground [&_svg]:text-muted-foreground [&_svg]:size-4 hover:bg-card hover:text-card-foreground hover:[&_svg]:text-card-foreground active:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] active:text-card-foreground active:[&_svg]:text-card-foreground rounded-[6px] relative z-10"
+            >
+              <PaletteIcon weight="fill" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="min-w-fit w-auto">
+            <DropdownMenuSub>
+              <DropdownMenuSubTrigger className="whitespace-normal">
+                <div className="flex items-center justify-between gap-4 min-w-0 w-full">
+                  <span>Theme</span>
+                  {themes.find(t => t.value === theme) && (
+                    <span className="text-muted-foreground text-xs shrink-0">
+                      {themes.find(t => t.value === theme)?.label}
+                    </span>
+                  )}
+                </div>
+              </DropdownMenuSubTrigger>
+              <DropdownMenuSubContent>
+                {themes.map((themeOption) => (
+                  <DropdownMenuItem
+                    key={themeOption.value}
+                    onClick={() => setTheme(themeOption.value)}
+                    className="flex items-center justify-between"
+                  >
+                    <span>{themeOption.label}</span>
+                    {theme === themeOption.value && (
+                      <CheckIcon className="size-4" />
+                    )}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuSubContent>
+            </DropdownMenuSub>
+            <DropdownMenuSub>
+              <DropdownMenuSubTrigger className="whitespace-normal">
+                <div className="flex items-center justify-between gap-4 min-w-0 w-full">
+                  <span>Density</span>
+                  {densities.find(d => d.value === density) && (
+                    <span className="text-muted-foreground text-xs shrink-0">
+                      {densities.find(d => d.value === density)?.label}
+                    </span>
+                  )}
+                </div>
+              </DropdownMenuSubTrigger>
+              <DropdownMenuSubContent>
+                {densities.map((densityOption) => (
+                  <DropdownMenuItem
+                    key={densityOption.value}
+                    onClick={() => setDensity(densityOption.value)}
+                    className="flex items-center justify-between"
+                  >
+                    <span>{densityOption.label}</span>
+                    {density === densityOption.value && (
+                      <CheckIcon className="size-4" />
+                    )}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuSubContent>
+            </DropdownMenuSub>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </header>
       <div className="flex-1 flex flex-col items-center justify-center p-4 gap-4 -mt-12">
         <div className="w-[574px] flex flex-col gap-1">
@@ -112,22 +214,28 @@ export default function Page() {
                 className={`h-7 w-7 rounded-[6px] flex items-center justify-center transition-colors ${
                   !inputValue.trim() 
                     ? "bg-[oklab(0.943853_0.00107113_0.000336707_/_0.2)] cursor-not-allowed pointer-events-none" 
-                    : "bg-white hover:bg-white/90 cursor-pointer"
+                    : "bg-foreground hover:bg-foreground/90 cursor-pointer"
                 }`}
               >
-                <ArrowUpIcon className="size-4" style={{ color: 'var(--background)' }} />
+                <ArrowUpIcon 
+                  className={`size-4 ${
+                    !inputValue.trim() 
+                      ? "text-muted-foreground" 
+                      : "text-background"
+                  }`} 
+                />
               </div>
             </PromptInputActions>
           </PromptInput>
         </div>
         <div className="flex gap-2 justify-center flex-wrap max-w-[574px]">
-          <PromptSuggestion onClick={() => setInputValue("Find and fix a bug")} className="bg-[rgb(27,26,21)] text-muted-foreground">
+          <PromptSuggestion onClick={() => setInputValue("Find and fix a bug")} className="bg-muted dark-cursor:bg-[rgb(27,26,21)] text-muted-foreground">
             Find and fix a bug
           </PromptSuggestion>
-          <PromptSuggestion onClick={() => setInputValue("Optimize performance")} className="bg-[rgb(27,26,21)] text-muted-foreground">
+          <PromptSuggestion onClick={() => setInputValue("Optimize performance")} className="bg-muted dark-cursor:bg-[rgb(27,26,21)] text-muted-foreground">
             Optimize performance
           </PromptSuggestion>
-          <PromptSuggestion onClick={() => setInputValue("Update missing README section")} className="bg-[rgb(27,26,21)] text-muted-foreground">
+          <PromptSuggestion onClick={() => setInputValue("Update missing README section")} className="bg-muted dark-cursor:bg-[rgb(27,26,21)] text-muted-foreground">
             Update missing README section
           </PromptSuggestion>
         </div>
