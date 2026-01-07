@@ -8,7 +8,7 @@ import {
   PromptInputActions,
   PromptInputAction,
 } from "@/components/ui/prompt-input";
-import { ArrowUpIcon, PaperclipIcon, GearIcon } from "@phosphor-icons/react";
+import { ArrowUpIcon, PaperclipIcon, GearIcon, PaletteIcon, CheckIcon } from "@/lib/icons";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/select";
 import { PromptSuggestion } from "@/components/ui/prompt-suggestion";
 import { useTheme } from "@/components/theme-provider";
-import { PaletteIcon, CheckIcon } from "@phosphor-icons/react";
+import { useIconPack } from "@/components/icon-pack-provider";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -36,6 +36,7 @@ export default function Page() {
   const [selectedRepo, setSelectedRepo] = useState("gt-cursor");
   const [selectedBranch, setSelectedBranch] = useState("main");
   const { theme, setTheme } = useTheme();
+  const { iconPack, setIconPack } = useIconPack();
   const [density, setDensity] = useState<"default" | "comfortable">(() => {
     if (typeof window !== "undefined") {
       return (localStorage.getItem("density") as "default" | "comfortable") || "default";
@@ -53,6 +54,11 @@ export default function Page() {
   const densities: Array<{ value: "default" | "comfortable"; label: string }> = [
     { value: "default", label: "Default" },
     { value: "comfortable", label: "Comfortable" },
+  ];
+  
+  const iconPacks: Array<{ value: "phosphor" | "lucide"; label: string }> = [
+    { value: "phosphor", label: "Phosphor" },
+    { value: "lucide", label: "Lucide" },
   ];
   
   useEffect(() => {
@@ -86,14 +92,11 @@ export default function Page() {
           <GearIcon />
         </Button>
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <button
-              type="button"
-              aria-label="Switch theme"
-              className="text-muted-foreground [&_svg]:text-muted-foreground [&_svg]:size-4 hover:bg-card hover:text-card-foreground hover:[&_svg]:text-card-foreground active:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] active:text-card-foreground active:[&_svg]:text-card-foreground rounded-[6px] relative z-10 size-[var(--density-button-height)] flex items-center justify-center"
-            >
-              <PaletteIcon weight="fill" />
-            </button>
+          <DropdownMenuTrigger
+            className="text-muted-foreground [&_svg]:text-muted-foreground [&_svg]:size-4 hover:bg-card hover:text-card-foreground hover:[&_svg]:text-card-foreground active:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] active:text-card-foreground active:[&_svg]:text-card-foreground rounded-[6px] relative z-10 size-[var(--density-button-height)] flex items-center justify-center"
+            aria-label="Switch theme"
+          >
+            <PaletteIcon weight="fill" />
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="min-w-fit w-auto">
             <DropdownMenuSub>
@@ -142,6 +145,32 @@ export default function Page() {
                   >
                     <span>{densityOption.label}</span>
                     {density === densityOption.value && (
+                      <CheckIcon className="size-4" />
+                    )}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuSubContent>
+            </DropdownMenuSub>
+            <DropdownMenuSub>
+              <DropdownMenuSubTrigger className="whitespace-normal">
+                <div className="flex items-center justify-between gap-4 min-w-0 w-full">
+                  <span>Icon Pack</span>
+                  {iconPacks.find(p => p.value === iconPack) && (
+                    <span className="text-muted-foreground text-xs shrink-0">
+                      {iconPacks.find(p => p.value === iconPack)?.label}
+                    </span>
+                  )}
+                </div>
+              </DropdownMenuSubTrigger>
+              <DropdownMenuSubContent>
+                {iconPacks.map((iconPackOption) => (
+                  <DropdownMenuItem
+                    key={iconPackOption.value}
+                    onClick={() => setIconPack(iconPackOption.value)}
+                    className="flex items-center justify-between"
+                  >
+                    <span>{iconPackOption.label}</span>
+                    {iconPack === iconPackOption.value && (
                       <CheckIcon className="size-4" />
                     )}
                   </DropdownMenuItem>

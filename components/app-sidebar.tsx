@@ -28,7 +28,7 @@ import {
   MagnifyingGlassIcon,
   HexagonIcon,
   QuestionIcon,
-} from "@phosphor-icons/react"
+} from "@/lib/icons"
 import { Button } from "@/components/ui/button"
 import {
   Select,
