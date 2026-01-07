@@ -69,8 +69,10 @@ function SelectContent({
 }: SelectPrimitive.Popup.Props &
   Pick<
     SelectPrimitive.Positioner.Props,
-    "align" | "alignOffset" | "side" | "sideOffset" | "alignItemWithTrigger" | "flip"
-  >) {
+    "align" | "alignOffset" | "side" | "sideOffset" | "alignItemWithTrigger"
+  > & {
+    flip?: boolean
+  }) {
   return (
     <SelectPrimitive.Portal>
       <SelectPrimitive.Positioner
@@ -79,7 +81,7 @@ function SelectContent({
         align={align}
         alignOffset={alignOffset}
         alignItemWithTrigger={alignItemWithTrigger}
-        flip={flip}
+        {...(flip !== undefined ? { flip } : {})}
         className="isolate z-50"
       >
         <SelectPrimitive.Popup

@@ -445,7 +445,7 @@ function FormExample() {
                     <SelectTrigger id="small-form-role">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent flip={true}>
                       <SelectGroup>
                         {roleItems.map((item) => (
                           <SelectItem key={item.value} value={item.value}>

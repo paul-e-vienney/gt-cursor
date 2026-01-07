@@ -61,7 +61,7 @@ export function AppSidebar({ children }: { children: React.ReactNode }) {
                 <HexagonIcon className="size-4 shrink-0" />
                 <SelectValue className="min-w-0 max-w-[calc(100%-2rem)] overflow-hidden text-ellipsis whitespace-nowrap capitalize" />
               </SelectTrigger>
-              <SelectContent className="min-w-fit w-auto max-w-[300px]">
+              <SelectContent className="min-w-fit w-auto max-w-[300px]" flip={true}>
                 <SelectItem value="screenplay">
                   <HexagonIcon className="size-4" />
                   Screenplay
