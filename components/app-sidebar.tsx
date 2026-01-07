@@ -56,10 +56,10 @@ export function AppSidebar({ children }: { children: React.ReactNode }) {
       <Sidebar>
         <SidebarHeader className="border-b border-border">
           <div className="flex items-center gap-2 w-full">
-            <Select value={selectedWorkspace} onValueChange={setSelectedWorkspace}>
+            <Select value={selectedWorkspace} onValueChange={(value) => value && setSelectedWorkspace(value)}>
               <SelectTrigger className="w-fit text-[13px] text-muted-foreground [&_svg]:text-muted-foreground border-transparent bg-transparent hover:bg-card hover:text-card-foreground hover:[&_svg]:text-card-foreground active:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] active:text-card-foreground active:[&_svg]:text-card-foreground rounded-[6px] whitespace-normal *:data-[slot=select-value]:line-clamp-none gap-2 min-w-fit">
                 <HexagonIcon className="size-4 shrink-0" />
-                <SelectValue placeholder="Select workspace" className="min-w-0 max-w-[calc(100%-2rem)] overflow-hidden text-ellipsis whitespace-nowrap capitalize" />
+                <SelectValue className="min-w-0 max-w-[calc(100%-2rem)] overflow-hidden text-ellipsis whitespace-nowrap capitalize" />
               </SelectTrigger>
               <SelectContent className="min-w-fit w-auto max-w-[300px]">
                 <SelectItem value="screenplay">
