@@ -81,9 +81,9 @@ export default function Page() {
           >
             <PromptInputTextarea placeholder="Ask a question or collaborate on your next PR" disableAutosize />
             <div className="absolute bottom-2 left-2">
-              <Select value={selectedModel} onValueChange={setSelectedModel}>
+              <Select value={selectedModel} onValueChange={(value) => value && setSelectedModel(value)}>
                 <SelectTrigger className="w-fit text-[13px] text-muted-foreground [&_svg]:text-muted-foreground border-transparent bg-transparent hover:bg-card hover:text-card-foreground hover:[&_svg]:text-card-foreground active:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] active:text-card-foreground active:[&_svg]:text-card-foreground rounded-[6px] whitespace-normal *:data-[slot=select-value]:line-clamp-none gap-2 min-w-fit [&>svg:last-of-type]:!rotate-0 data-[open]:[&>svg:last-of-type]:!rotate-0 aria-expanded:[&>svg:last-of-type]:!rotate-0 px-2">
-                  <SelectValue placeholder="Select model" className="min-w-0 max-w-[calc(100%-2rem)] overflow-hidden text-ellipsis whitespace-nowrap">
+                  <SelectValue className="min-w-0 max-w-[calc(100%-2rem)] overflow-hidden text-ellipsis whitespace-nowrap">
                     {modelOptions[selectedModel as keyof typeof modelOptions] || selectedModel}
                   </SelectValue>
                 </SelectTrigger>
