@@ -55,7 +55,7 @@ export default function Page() {
           <div className="flex gap-2 pl-2">
             <Select value={selectedRepo} onValueChange={(value) => value && setSelectedRepo(value)}>
               <SelectTrigger className="w-fit text-[13px] text-muted-foreground [&_svg]:text-muted-foreground border-transparent bg-transparent hover:text-card-foreground hover:[&_svg]:text-card-foreground active:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] active:text-card-foreground active:[&_svg]:text-card-foreground rounded-[6px] whitespace-normal *:data-[slot=select-value]:line-clamp-none gap-2 min-w-fit [&>svg:last-of-type]:!rotate-0 data-[open]:[&>svg:last-of-type]:!rotate-0 aria-expanded:[&>svg:last-of-type]:!rotate-0 px-0 h-7 items-center">
-                <SelectValue placeholder="Select repo" className="min-w-0 max-w-[calc(100%-2rem)] overflow-hidden text-ellipsis whitespace-nowrap" />
+                <SelectValue className="min-w-0 max-w-[calc(100%-2rem)] overflow-hidden text-ellipsis whitespace-nowrap" />
               </SelectTrigger>
               <SelectContent className="min-w-fit w-auto max-w-[300px]" side="bottom" sideOffset={8} flip={false}>
                 <SelectItem value="gt-cursor" className="pl-2">gt-cursor</SelectItem>
@@ -64,7 +64,7 @@ export default function Page() {
             </Select>
             <Select value={selectedBranch} onValueChange={(value) => value && setSelectedBranch(value)}>
               <SelectTrigger className="w-fit text-[13px] text-muted-foreground [&_svg]:text-muted-foreground border-transparent bg-transparent hover:text-card-foreground hover:[&_svg]:text-card-foreground active:bg-[oklab(0.943853_0.00107113_0.000336707_/_0.06)] active:text-card-foreground active:[&_svg]:text-card-foreground rounded-[6px] whitespace-normal *:data-[slot=select-value]:line-clamp-none gap-2 min-w-fit [&>svg:last-of-type]:!rotate-0 data-[open]:[&>svg:last-of-type]:!rotate-0 aria-expanded:[&>svg:last-of-type]:!rotate-0 px-0 h-7 items-center">
-                <SelectValue placeholder="Select branch" className="min-w-0 max-w-[calc(100%-2rem)] overflow-hidden text-ellipsis whitespace-nowrap" />
+                <SelectValue className="min-w-0 max-w-[calc(100%-2rem)] overflow-hidden text-ellipsis whitespace-nowrap" />
               </SelectTrigger>
               <SelectContent className="min-w-fit w-auto max-w-[300px]" side="bottom" sideOffset={8} flip={false}>
                 <SelectItem value="main" className="pl-2">main</SelectItem>
